@@ -11,3 +11,13 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+button {
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+button:active {
+    position: relative;
+    top: 1px;
+}

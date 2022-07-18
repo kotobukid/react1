@@ -9,6 +9,9 @@ function App() {
                 hello world
                 <br/>
                 <Clicker />
+                <Clicker />
+                <Clicker />
+                <Clicker />
             </header>
         </div>
     );
