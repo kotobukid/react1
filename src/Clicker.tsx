@@ -1,8 +1,8 @@
 import {useState} from "react";
 import "./Clicker.css";
 
-const Clicker = () => {
-    const [num, setNum] = useState(0);
+const Clicker = (props: {num: number}) => {
+    const [num, setNum] = useState(props.num);
     return (
         <div className="clicker">
             <button onClick={() => {
