@@ -23,7 +23,7 @@ function App() {
                 <br/>
                 <div className="buttons">
                     {nums.map((n: {index: number, value: number}) => {
-                        return (<Clicker key={n.index} num={n.value}/>)
+                        return (<Clicker key={n.index} num={n.value} setNumber={(v: number) => {nums[n.index].value = v; setNums(nums); }}/>)
                     })}
                 </div>
             </header>
