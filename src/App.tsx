@@ -2,12 +2,17 @@ import React, {useState} from 'react';
 import './App.css';
 import {Clicker} from "./Clicker";
 
+declare type IndexedNumber = {
+    index: number,
+    value: number
+}
+
 function App() {
-    const [nums, setNums] = useState([] as {index: number, value: number}[]);
+    const [nums, setNums] = useState([] as IndexedNumber[]);
     const [index, setIndex] = useState(0);
 
     const all_reset = () => {
-        setNums(nums.map((n) => {return {index: n.index, value: 0}}))
+        setNums(nums.map((n: IndexedNumber) => {return {index: n.index, value: 0}}))
     }
 
     return (
@@ -22,8 +27,12 @@ function App() {
                 <button onClick={all_reset}>All reset</button>
                 <br/>
                 <div className="buttons">
-                    {nums.map((n: {index: number, value: number}) => {
-                        return (<Clicker key={n.index} num={n.value} setNumber={(v: number) => {nums[n.index].value = v; setNums(nums); }}/>)
+                    {nums.map((n: IndexedNumber) => {
+                        return (<Clicker key={n.index} num={n.value} index={n.index} setNumber={(info: IndexedNumber) => {
+                            nums[info.index].value = info.value;
+                            setNums(nums.concat([]));
+                            console.log(nums);
+                        }}/>)
                     })}
                 </div>
             </header>

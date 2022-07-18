@@ -1,19 +1,15 @@
-import {useState} from "react";
 import "./Clicker.css";
 
-const Clicker = (props: {num: number, setNumber: (v: number) => void}) => {
-    const [num, setNum] = useState(props.num);
+const Clicker = (props: {num: number, index: number, setNumber: (info: {value: number, index: number}) => void}) => {
     return (
         <div className="clicker">
             <button onClick={() => {
-                // setNum(num + 1)
-                props.setNumber(num + 1);
+                props.setNumber({value: props.num + 1, index: props.index});
             }}>Click!
-                <span className="num">{num}</span>
+                <span className="num">{props.num}</span>
             </button>
             <button onClick={() => {
-                // setNum(0)
-                props.setNumber(0);
+                props.setNumber({value: 0, index: props.index});
             }}>Reset!</button>
         </div>
     )
