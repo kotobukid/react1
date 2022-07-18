@@ -1,0 +1,6 @@
+span.num {
+    display: inline-block;
+    margin-left: 1rem;
+    color: red;
+    font-weight: bolder;
+}
