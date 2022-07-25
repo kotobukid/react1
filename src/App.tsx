@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import {Clicker} from "./Clicker";
 
@@ -9,21 +9,30 @@ declare type IndexedNumber = {
 
 function App() {
     const [nums, setNums] = useState([] as IndexedNumber[])
+    const [total, setTotal] = useState(0)
     const [index, setIndex] = useState(0)
+
+    useEffect(() => {
+        document.title = `total: ${total} / Counters Index: ${index}`
+    })
 
     const all_reset = () => {
         setNums(nums.map((n: IndexedNumber) => {
             return {index: n.index, 'value': 0}
         }))
+        setTotal(0)
     }
 
     const setNumbers = (info: IndexedNumber) => {
         nums[info.index].value = info.value;
         setNums(nums.concat([]))
+        setTotal(nums.reduce((a, b) => {return a + b.value}, 0))
     }
 
     const wipe = () => {
         setNums([])
+        setIndex(0)
+        setTotal(0)
     }
 
     return (
