@@ -13,8 +13,35 @@ function App() {
     const [index, setIndex] = useState(0)
 
     useEffect(() => {
-        document.title = `total: ${total} / Counters Index: ${index}`
-    })
+        document.title = `Total: ${total} / Counters Index: ${index}`
+    }, [total, index])
+
+    const ls_key: string = 'rra_nums'
+
+    const save_to_localStorage = () => {
+        localStorage.setItem(ls_key, JSON.stringify(nums))
+    }
+
+    const load_from_localStorage = () => {
+        let parsed: IndexedNumber[] = []
+        try {
+            parsed = JSON.parse(localStorage.getItem(ls_key) || '[]')
+        } catch (e) {
+            parsed = []
+        }
+
+        setNums(parsed.map((p: IndexedNumber, index: number) => {
+            return {
+                value: p.value,
+                index
+            }
+        }))
+        setIndex(parsed.length)
+    }
+
+    useEffect(() => {
+        load_from_localStorage()
+    }, [])
 
     const all_reset = () => {
         setNums(nums.map((n: IndexedNumber) => {
@@ -26,7 +53,9 @@ function App() {
     const setNumbers = (info: IndexedNumber) => {
         nums[info.index].value = info.value;
         setNums(nums.concat([]))
-        setTotal(nums.reduce((a, b) => {return a + b.value}, 0))
+        setTotal(nums.reduce((a, b) => {
+            return a + b.value
+        }, 0))
     }
 
     const wipe = () => {
@@ -48,6 +77,7 @@ function App() {
                 </button>
                 <button onClick={all_reset}>Reset All</button>
                 <button onClick={wipe}>Wipe All</button>
+                <button onClick={save_to_localStorage}>Save</button>
                 <br/>
                 <div className="buttons">
                     {nums.map((n: IndexedNumber) => {
