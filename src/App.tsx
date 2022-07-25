@@ -12,8 +12,15 @@ function App() {
     const [index, setIndex] = useState(0);
 
     const all_reset = () => {
-        setNums(nums.map((n: IndexedNumber) => {return {index: n.index, value: 0}}))
+        setNums(nums.map((n: IndexedNumber) => {
+            return {index: n.index, value: 0}
+        }))
     }
+
+    const setNumbers = (info: IndexedNumber) => {
+        nums[info.index].value = info.value;
+        setNums(nums.concat([]));
+    };
 
     return (
         <div className="App">
@@ -28,11 +35,7 @@ function App() {
                 <br/>
                 <div className="buttons">
                     {nums.map((n: IndexedNumber) => {
-                        return (<Clicker key={n.index} num={n.value} index={n.index} setNumber={(info: IndexedNumber) => {
-                            nums[info.index].value = info.value;
-                            setNums(nums.concat([]));
-                            console.log(nums);
-                        }}/>)
+                        return (<Clicker key={n.index} num={n.value} index={n.index} setNumber={setNumbers}/>)
                     })}
                 </div>
             </header>
