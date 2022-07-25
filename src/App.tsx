@@ -8,26 +8,30 @@ declare type IndexedNumber = {
 }
 
 function App() {
-    const [nums, setNums] = useState([] as IndexedNumber[]);
-    const [index, setIndex] = useState(0);
+    const [nums, setNums] = useState([] as IndexedNumber[])
+    const [index, setIndex] = useState(0)
 
     const all_reset = () => {
         setNums(nums.map((n: IndexedNumber) => {
-            return {index: n.index, value: 0}
+            return {index: n.index, 'value': 0}
         }))
     }
 
     const setNumbers = (info: IndexedNumber) => {
         nums[info.index].value = info.value;
-        setNums(nums.concat([]));
-    };
+        setNums(nums.concat([]))
+    }
 
-    const wipe = () => {setNums([])};
+    const wipe = () => {
+        setNums([])
+    }
 
     return (
         <div className="App">
             <header className="App-header">
                 hello world
+            </header>
+            <div className="App-body">
                 <button onClick={() => {
                     setIndex(index + 1)
                     setNums([...nums, {index, value: 0}])
@@ -41,7 +45,7 @@ function App() {
                         return (<Clicker key={n.index} num={n.value} index={n.index} setNumber={setNumbers}/>)
                     })}
                 </div>
-            </header>
+            </div>
         </div>
     );
 }
