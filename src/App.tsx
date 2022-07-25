@@ -22,6 +22,8 @@ function App() {
         setNums(nums.concat([]));
     };
 
+    const wipe = () => {setNums([])};
+
     return (
         <div className="App">
             <header className="App-header">
@@ -31,7 +33,8 @@ function App() {
                     setNums([...nums, {index, value: 0}])
                 }}> plus
                 </button>
-                <button onClick={all_reset}>All reset</button>
+                <button onClick={all_reset}>Reset All</button>
+                <button onClick={wipe}>Wipe All</button>
                 <br/>
                 <div className="buttons">
                     {nums.map((n: IndexedNumber) => {
